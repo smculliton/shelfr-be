@@ -9,3 +9,4 @@ const recipesController_1 = __importDefault(require("../controllers/recipesContr
 exports.recipesRouter = (0, express_1.Router)();
 exports.recipesRouter.get('/', recipesController_1.default.getRecipes);
 exports.recipesRouter.get('/:id', recipesController_1.default.getRecipeById);
+exports.recipesRouter.post('/', recipesController_1.default.createRecipe);

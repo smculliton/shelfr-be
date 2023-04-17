@@ -5,3 +5,4 @@ export const recipesRouter: Router = Router()
 
 recipesRouter.get('/', recipesController.getRecipes)
 recipesRouter.get('/:id', recipesController.getRecipeById)
+recipesRouter.post('/', recipesController.createRecipe)

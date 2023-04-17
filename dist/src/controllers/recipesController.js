@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient;
+const prisma = new client_1.PrismaClient();
 const getRecipes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const recipes = yield prisma.recipe.findMany();
     res.json(recipes);
@@ -22,7 +22,29 @@ const getRecipeById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     });
     res.json(recipe);
 });
+const createRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, steps, description, ingredients } = req.body;
+    const ingredientData = ingredients.map((ingredient) => {
+        return {
+            name: ingredient.name,
+            amount: ingredient.amount,
+            unit: ingredient.unit
+        };
+    });
+    const recipe = yield prisma.recipe.create({
+        data: {
+            name: name,
+            steps: steps,
+            description: description,
+            ingredients: {
+                create: ingredientData
+            }
+        }
+    });
+    res.json(recipe);
+});
 exports.default = {
     getRecipes,
-    getRecipeById
+    getRecipeById,
+    createRecipe
 };
