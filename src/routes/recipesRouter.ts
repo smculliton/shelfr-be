@@ -4,3 +4,4 @@ import recipesController from '../controllers/recipesController'
 export const recipesRouter: Router = Router()
 
 recipesRouter.get('/', recipesController.getRecipes)
+recipesRouter.get('/:id', recipesController.getRecipeById)
