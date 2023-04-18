@@ -43,8 +43,17 @@ const createRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     });
     res.json(recipe);
 });
+const deleteRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const recipe = yield prisma.recipe.delete({
+        where: { id: parseInt(id) }
+    });
+    console.log(recipe);
+    res.json(recipe);
+});
 exports.default = {
     getRecipes,
     getRecipeById,
-    createRecipe
+    createRecipe,
+    deleteRecipe
 };

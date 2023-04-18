@@ -41,8 +41,19 @@ const createRecipe = async (req: Request, res: Response) => {
   res.json(recipe)
 }
 
+const deleteRecipe = async (req: Request, res: Response) => {
+  const { id }: { id?: string} = req.params
+
+  const recipe = await prisma.recipe.delete({
+    where: { id: parseInt(id) }
+  })
+  console.log(recipe)
+  res.json(recipe)
+}
+
 export default { 
   getRecipes,
   getRecipeById,
-  createRecipe
+  createRecipe,
+  deleteRecipe
 }
