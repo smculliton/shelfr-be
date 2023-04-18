@@ -2,7 +2,7 @@ import express, {Express, Request, Response} from 'express'
 import { recipesRouter } from './src/routes/recipesRouter'
 
 const app: Express = express()
-const port = 3000
+const port = process.env.PORT
 
 app.use(express.json())
 
