@@ -43,17 +43,40 @@ const createRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     });
     res.json(recipe);
 });
+const updateRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { name, steps, description } = req.body;
+    try {
+        const recipe = yield prisma.recipe.update({
+            where: { id: parseInt(id) },
+            data: {
+                name: name,
+                steps: steps,
+                description: description
+            }
+        });
+        res.json(recipe);
+    }
+    catch (e) {
+        res.json({ error: `Record with id ${id} could not be found` });
+        // if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        //   if (e.code === 'P2025') {
+        //     res.json(`Record with id ${id} could not be found`)
+        //   }
+        // }
+    }
+});
 const deleteRecipe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const recipe = yield prisma.recipe.delete({
         where: { id: parseInt(id) }
     });
-    console.log(recipe);
     res.json(recipe);
 });
 exports.default = {
     getRecipes,
     getRecipeById,
     createRecipe,
+    updateRecipe,
     deleteRecipe
 };
