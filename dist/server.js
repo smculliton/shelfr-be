@@ -7,8 +7,9 @@ const express_1 = __importDefault(require("express"));
 const recipesRouter_1 = require("./src/routes/recipesRouter");
 const app = (0, express_1.default)();
 const port = 3000;
+app.use(express_1.default.json());
 app.get('/', (req, res) => {
-    res.send('Hello, this is Express + TypeScript');
+    res.send('Hello, Welcome to the Shelfr API');
 });
 app.use('/api/v1/recipes', recipesRouter_1.recipesRouter);
 app.listen(port, () => {
