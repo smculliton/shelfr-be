@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const recipesRouter_1 = require("./src/routes/recipesRouter");
 const app = (0, express_1.default)();
-const port = 3000;
+const port = process.env.PORT;
 app.use(express_1.default.json());
 app.get('/', (req, res) => {
     res.send('Hello, Welcome to the Shelfr API');
