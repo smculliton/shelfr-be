@@ -11,7 +11,14 @@ const getRecipes = async (req: Request, res: Response) => {
 const getRecipeById = async (req: Request, res: Response) => {
   const { id }: { id?: string} = req.params
   const recipe = await prisma.recipe.findUnique({
-      where: { id: Number(id) }
+      where: { id: Number(id) },
+      include: { ingredients: {
+        select: {
+          name: true,
+          amount: true,
+          unit: true
+        }
+      }}
   })
   res.json(recipe)
 }

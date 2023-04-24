@@ -18,7 +18,14 @@ const getRecipes = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 const getRecipeById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const recipe = yield prisma.recipe.findUnique({
-        where: { id: Number(id) }
+        where: { id: Number(id) },
+        include: { ingredients: {
+                select: {
+                    name: true,
+                    amount: true,
+                    unit: true
+                }
+            } }
     });
     res.json(recipe);
 });
