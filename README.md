@@ -1,3 +1,31 @@
+## Setup
+### clone and navigate into repo
+`git clone git@github.com:smculliton/shelfr-be.git` <br>
+`cd shelfr-be` <br>
+
+### install dependencies
+`npm i` <br>
+
+### create database
+`createdb shelfr`
+
+### configure environmental variables
+`touch .env` <br>
+
+ADD TO .ENV FILE
+```
+DATABASE_URL="postgresql://<Your DB Username>:<Your DB Password>@localhost:5432/shelfr?schema=public"
+PORT="3000"
+```
+
+### migrate and seed database
+`npx prisma migrate dev` <br>
+`npx ts-node prisma/seed.ts` <br>
+
+### run server
+`npm run dev`
+
+
 ## Recipes Endpoints
   <details close>
     <summary>Fetch All Recipes in the Database</summary>
